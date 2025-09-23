@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать задачу</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Заголовок -->
+        <header class="header">
+            <h1>Редактировать задачу</h1>
+        </header>
+
+        <!-- Панель редактирования задачи -->
+        <section class="add-task-panel">
+            <form class="task-form" action="/tasks/<%= task.id %>" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <input type="text" name="title" value="<%= task.title %>" placeholder="Введите задачу..." required>
+                    <input type="date" name="dueDate" value="<%= task.dueDate %>">
+                    <input type="file" name="attachment" accept="*/*">
+                    <button type="submit" class="btn">Сохранить изменения</button>
+                </div>
+            </form>
+        </section>
+
+        <a href="/" class="btn">Назад</a>
+    </div>
+</body>
+</html>

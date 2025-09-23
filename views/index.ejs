@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менеджер задач</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Заголовок -->   
+        <header class="header">
+            <h1>Менеджер задач</h1>
+        </header>
+
+        <!-- Панель добавления -->
+        <section class="add-task-panel">
+            <form class="task-form" action="/tasks" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <input type="text" name="title" placeholder="Введите задачу..." required>
+                    <input type="date" name="dueDate">
+                    <input type="file" name="attachment" accept="*/*">
+                    <button type="submit" class="btn">Добавить</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Панели задач -->
+        <div class="task-panels">
+            <!-- Все задачи -->
+            <section class="task-panel panel-all">
+                <h2>Все задачи</h2>
+                <ul class="task-list">
+                    <% tasks.forEach(task => { %>
+                        <li class="task-item <%= task.completed ? 'completed' : '' %> animate">
+                            <div class="checkbox-container">
+                                <form action="/tasks/<%= task.id %>/toggle" method="POST">
+                                    <input type="checkbox" <%= task.completed ? 'checked' : '' %> onchange="this.form.submit()">
+                                </form>
+                            </div>
+                            <div class="status-marker <%= task.completed ? 'marker-completed' : 'marker-active' %>"></div>
+                            <div class="task-content">
+                                <h3><%= task.title %></h3>
+                                <% if (task.dueDate) { %>
+                                    <span class="task-date"><%= new Date(task.dueDate).toLocaleDateString('ru-RU') %></span>
+                                <% } %>
+                                <% if (task.attachment) { %>
+                                    <a href="/uploads/<%= task.attachment %>" target="_blank" class="task-attachment">Файл</a>
+                                <% } %>
+                            </div>
+                            <!-- Inside each task item -->
+                            <form action="/tasks/<%= task.id %>/delete" method="POST" class="task-actions">
+                                <button type="submit" class="delete-btn">Удалить</button>
+                            </form>
+                            <form action="/tasks/<%= task.id %>/edit" method="GET" class="task-actions">
+                                <button type="submit" class="edit-btn">Редактировать</button>
+                            </form>
+                        </li>
+                    <% }); %>
+                </ul>
+            </section>
+
+            <!-- Активные -->
+            <section class="task-panel panel-active">
+                <h2>Активные</h2>
+                <ul class="task-list">
+                    <% tasks.filter(task => !task.completed).forEach(task => { %>
+                        <li class="task-item animate">
+                            <div class="checkbox-container">
+                                <form action="/tasks/<%= task.id %>/toggle" method="POST">
+                                    <input type="checkbox" onchange="this.form.submit()">
+                                </form>
+                            </div>
+                            <div class="status-marker marker-active"></div>
+                            <div class="task-content">
+                                <h3><%= task.title %></h3>
+                                <% if (task.dueDate) { %>
+                                    <span class="task-date"><%= new Date(task.dueDate).toLocaleDateString('ru-RU') %></span>
+                                <% } %>
+                                <% if (task.attachment) { %>
+                                    <a href="/uploads/<%= task.attachment %>" target="_blank" class="task-attachment">Файл</a>
+                                <% } %>
+                            </div>
+                            <!-- Inside each task item -->
+                            <form action="/tasks/<%= task.id %>/delete" method="POST" class="task-actions">
+                                <button type="submit" class="delete-btn">Удалить</button>
+                            </form>
+                            <form action="/tasks/<%= task.id %>/edit" method="GET" class="task-actions">
+                                <button type="submit" class="edit-btn">Редактировать</button>
+                            </form>
+                        </li>
+                    <% }); %>
+                </ul>
+            </section>
+
+            <!-- Завершённые -->
+            <section class="task-panel panel-completed">
+                <h2>Завершённые</h2>
+                <ul class="task-list">
+                    <% tasks.filter(task => task.completed).forEach(task => { %>
+                        <li class="task-item completed animate">
+                            <div class="checkbox-container">
+                                <form action="/tasks/<%= task.id %>/toggle" method="POST">
+                                    <input type="checkbox" checked onchange="this.form.submit()">
+                                </form>
+                            </div>
+                            <div class="status-marker marker-completed"></div>
+                            <div class="task-content">
+                                <h3><%= task.title %></h3>
+                                <% if (task.dueDate) { %>
+                                    <span class="task-date"><%= new Date(task.dueDate).toLocaleDateString('ru-RU') %></span>
+                                <% } %>
+                                <% if (task.attachment) { %>
+                                    <a href="/uploads/<%= task.attachment %>" target="_blank" class="task-attachment">Файл</a>
+                                <% } %>
+                            </div>
+                            <!-- Inside each task item -->
+                            <form action="/tasks/<%= task.id %>/delete" method="POST" class="task-actions">
+                                <button type="submit" class="delete-btn">Удалить</button>
+                            </form>
+                            <form action="/tasks/<%= task.id %>/edit" method="GET" class="task-actions">
+                                <button type="submit" class="edit-btn">Редактировать</button>
+                            </form>
+                        </li>
+                    <% }); %>
+                </ul>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
