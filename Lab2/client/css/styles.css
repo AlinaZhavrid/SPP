@@ -1,0 +1,252 @@
+/* ===== Общий стиль ===== */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #1e1e2e;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+}
+
+/* ===== Заголовок ===== */
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* ===== Панель добавления ===== */
+.add-task-panel {
+    background: #2a2a3b;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.task-form .form-row {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+.task-form input[type="text"],
+.task-form input[type="date"],
+.task-form input[type="file"] {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    background: #3a3a4d;
+    color: #fff;
+}
+.task-form input::placeholder {
+    color: #bbb;
+}
+.task-form .btn {
+    background: #4f46e5;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.task-form .btn:hover {
+    background: #4338ca;
+}
+
+/* ===== Фильтры ===== */
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+.filter-btn {
+    background: #3a3a4d;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #e0e0e0;
+    transition: 0.2s;
+}
+.filter-btn.active,
+.filter-btn:hover {
+    background: #4f46e5;
+    color: #fff;
+}
+
+/* ===== Панель задач ===== */
+.task-panels {
+    display: block;
+}
+.task-panel {
+    padding: 1rem;
+    border-radius: 12px;
+    background: #2a2a3b;
+}
+.task-panel h2 {
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #444;
+    font-size: 1.2rem;
+    color: #a78bfa;
+}
+
+/* ===== Список задач ===== */
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.task-item {
+    background: #3a3a4d;
+    border-radius: 10px;
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    transition: 0.3s;
+    position: relative;
+}
+.task-item.completed {
+    opacity: 0.7;
+    text-decoration: line-through;
+}
+.task-item:hover {
+    background: #44445c;
+}
+
+/* ===== Чекбоксы ===== */
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #4f46e5;
+    cursor: pointer;
+}
+
+/* ===== Маркеры статуса ===== */
+.status-marker {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.marker-active {
+    background: #60a5fa;
+}
+.marker-completed {
+    background: #34d399;
+}
+
+/* ===== Контент задачи ===== */
+.task-content {
+    flex: 1;
+}
+.task-content h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #fff;
+}
+.task-date {
+    display: block;
+    font-size: 0.8rem;
+    color: #bbb;
+}
+.task-attachment {
+    font-size: 0.8rem;
+    color: #4f9ef5;
+    text-decoration: none;
+}
+.task-attachment:hover {
+    text-decoration: underline;
+}
+
+/* ===== Кнопки действий ===== */
+.task-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 0.5rem;
+}
+.edit-btn {
+    background: #f59e0b;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.edit-btn:hover {
+    background: #d97706;
+}
+.delete-btn {
+    background: #ef4444;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.2s;
+}
+.delete-btn:hover {
+    background: #dc2626;
+}
+
+/* ===== Модальное окно ===== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+    background: #2a2a3b;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+}
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.btn-secondary {
+    background: #6b7280 !important;
+}
+.btn-secondary:hover {
+    background: #4b5563 !important;
+}
+
+/* ===== Анимация ===== */
+.animate {
+    animation: fadeInUp 0.4s ease;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
